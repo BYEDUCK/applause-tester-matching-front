@@ -1,0 +1,10 @@
+div.devices {
+  display: flex;
+  column-gap: 10px;
+}
+
+mat-card.selected {
+  background-color: #8149D5;
+  color: white;
+}
+

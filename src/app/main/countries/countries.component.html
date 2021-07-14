@@ -1,8 +1,9 @@
-<div *ngIf="countries$ | async as countries else loading">
-  <div *ngFor="let country of countries">
-    {{country}}
-  </div>
+<div *ngIf="countries$ | async as countries else loading" class="countries">
+  <mat-card *ngFor="let country of countries" [ngClass]="{'selected': country.selected}"
+            (click)="selectCountry(country)">
+    <img mat-card-image src="{{'assets/flags/' + country.cc2.toLowerCase() + '.svg'}}" alt="{{country.cc2}}">
+  </mat-card>
 </div>
 <ng-template #loading>
-  Loading...
+  <mat-spinner></mat-spinner>
 </ng-template>

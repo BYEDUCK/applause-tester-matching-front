@@ -1,0 +1,12 @@
+div.countries {
+  display: flex;
+  column-gap: 10px;
+}
+
+div.countries.img {
+  size: 50px 50px;
+}
+
+mat-card.selected {
+  border: #8149D5 solid;
+}

@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {DevicesComponent} from './devices/devices.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CountriesComponent} from './countries/countries.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import {CountriesComponent} from './countries/countries.component';
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class MainModule {
