@@ -1,0 +1,8 @@
+<div *ngIf="countries$ | async as countries else loading">
+  <div *ngFor="let country of countries">
+    {{country}}
+  </div>
+</div>
+<ng-template #loading>
+  Loading...
+</ng-template>

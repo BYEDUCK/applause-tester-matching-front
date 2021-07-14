@@ -1,0 +1,8 @@
+<div *ngIf="devices$ | async as devices else loading">
+  <div *ngFor="let device of devices">
+    {{device.id}} -> {{device.description}}
+  </div>
+</div>
+<ng-template #loading>
+  Loading...
+</ng-template>
