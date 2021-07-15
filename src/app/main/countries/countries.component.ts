@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HttpService} from '../http.service';
-import {delay, map} from 'rxjs/operators';
+import {delay, first, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-countries',
@@ -10,20 +9,28 @@ import {delay, map} from 'rxjs/operators';
 })
 export class CountriesComponent implements OnInit {
 
-  countries$: Observable<CountryView[]>;
+  countriesView: CountryView[];
+  @Output()
+  selectedCountries: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor(private httpService: HttpService) {
   }
 
   ngOnInit(): void {
-    this.countries$ = this.httpService.getCountries().pipe(
+    this.httpService.getCountries().pipe(
+      first(),
       map((countries) => countries.map((c) => new CountryView(c))),
       delay(500)
-    );
+    ).subscribe((cs) => this.countriesView = cs);
   }
 
   selectCountry(country: CountryView): void {
     country.selected = !country.selected;
+    this.selectedCountries.emit(
+      this.countriesView
+        .filter((cv) => cv.selected)
+        .map((cv) => cv.cc2)
+    );
   }
 }
 

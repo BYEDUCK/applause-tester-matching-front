@@ -1,5 +1,9 @@
 <div>
-  <app-devices></app-devices>
+  <app-devices (selectedDevices)="selectDevices($event)"></app-devices>
   <br/>
-  <app-countries></app-countries>
+  <app-countries (selectedCountries)="selectCountries($event)"></app-countries>
+  <br/>
+  <app-query [countries]="selectedCountries" [devices]="selectedDevices" (rankedTesters)="result($event)"></app-query>
+  <br/>
+  <app-results [results]="rankedTesters"></app-results>
 </div>

@@ -1,4 +1,4 @@
-<div *ngIf="devices$ | async as devices else loading" class="devices">
+<div *ngIf="devicesView as devices else loading" class="devices">
   <mat-card *ngFor="let device of devices" [ngClass]="{'selected': device.selected}" (click)="selectDevice(device)">
     <mat-card-subtitle>{{device.description}}</mat-card-subtitle>
     <mat-card-content>
