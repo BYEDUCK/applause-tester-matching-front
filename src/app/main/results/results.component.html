@@ -1,7 +1,14 @@
 <div *ngIf="rankedTesters$ | async as rankedTesters" class="resultCards">
-  <mat-card *ngFor="let rankedTester of rankedTesters">
-    <h4 mat-card-title>{{rankedTester.firstName}} {{rankedTester.lastName}}</h4>
-    <h5 mat-card-subtitle>ID: {{rankedTester.id}}</h5>
-    <h5 mat-card-subtitle>Rank: <strong>{{rankedTester.rank}}</strong></h5>
-  </mat-card>
+  <ng-container *ngIf="rankedTesters.length > 0 else empty">
+    <mat-card *ngFor="let rankedTester of rankedTesters; first as isFirst" [ngClass]="{'winner': isFirst}">
+      <h4 mat-card-title>{{rankedTester.firstName}} {{rankedTester.lastName}}</h4>
+      <h5 mat-card-subtitle>ID: {{rankedTester.id}}</h5>
+      <h5 mat-card-subtitle>Rank: <strong>{{rankedTester.rank}}</strong></h5>
+    </mat-card>
+  </ng-container>
+  <ng-template #empty>
+    <mat-card>
+      <h4 mat-card-title>No results</h4>
+    </mat-card>
+  </ng-template>
 </div>

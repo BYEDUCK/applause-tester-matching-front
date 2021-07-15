@@ -1,11 +1,27 @@
 <mat-card>
   <mat-card-subtitle>Query</mat-card-subtitle>
-  <ng-container *ngIf="query$ | async as query">
+  <ng-container *ngIf="devicesAndCountries$ | async as devicesAndCountries">
     <mat-card-content>
-      {{query}}
+      <ng-container *ngIf="devicesAndCountries[0].length === 0 else devicesContainer">
+        Device = ALL
+      </ng-container>
+      <ng-template #devicesContainer>
+        <span *ngFor="let device of devicesAndCountries[0]; last as isLast">
+          Device = {{device.description}} <strong>{{!isLast ? ' OR ' : ''}}</strong>
+        </span>
+      </ng-template>
+      <strong> AND </strong>
+      <ng-container *ngIf="devicesAndCountries[1].length === 0 else countriesContainer">
+        Country = ALL
+      </ng-container>
+      <ng-template #countriesContainer>
+        <span *ngFor="let country of devicesAndCountries[1]; last as isLast">
+          Country = {{country}} <strong>{{!isLast ? ' OR ' : ''}}</strong>
+        </span>
+      </ng-template>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="submitQuery()">SUBMIT</button>
+      </mat-card-actions>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="submitQuery()">SUBMIT</button>
-    </mat-card-actions>
   </ng-container>
 </mat-card>

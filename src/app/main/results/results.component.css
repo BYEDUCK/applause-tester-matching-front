@@ -2,3 +2,7 @@ div.resultCards {
   display: flex;
   column-gap: 20px;
 }
+
+mat-card.winner {
+  background-color: goldenrod;
+}
